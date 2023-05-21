@@ -34,7 +34,7 @@ void encryptFile(const char* inputFileName, const char* outputFileName, const ch
 }
 
 void decryptFile(const char* inputFileName, const char* outputFileName, const char* key) {
-    
+    encryptFile(inputFileName, outputFileName, key);// criptarea si decriptarea sunt aceleasi operatii
 }
 
 int main() {
