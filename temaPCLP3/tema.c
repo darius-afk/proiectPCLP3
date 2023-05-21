@@ -42,7 +42,11 @@ int main() {
     const char* inputFileName = "input.txt";// fisierul ce urmeaza sa fie criptat
     const char* encryptedFileName = "encrypted.txt";// fisierul criptat
     const char* decryptedFileName = "decrypted.txt";// fisierul decriptat
-    const char* key = "Nu_Restanta";// cheia dupa care se cripteaza
+    char key[256];// cheia dupa care se cripteaza
+    
+    printf("Introduceți cheia de criptare/decriptare: ");
+    fgets(key, sizeof(key), stdin);
+    key[strcspn(key, "\n")] = '\0'; // Elimină caracterul newline de la sfârșitul șirului introdus
 
     encryptFile(inputFileName, encryptedFileName, key);// criptam fisierul
     printf("Fișierul a fost criptat cu succes.\n");
