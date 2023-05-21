@@ -43,16 +43,32 @@ int main() {
     const char* encryptedFileName = "encrypted.txt";// fisierul criptat
     const char* decryptedFileName = "decrypted.txt";// fisierul decriptat
     char key[256];// cheia dupa care se cripteaza
-    
-    printf("Introduceți cheia de criptare/decriptare: ");
-    fgets(key, sizeof(key), stdin);
-    key[strcspn(key, "\n")] = '\0'; // Elimină caracterul newline de la sfârșitul șirului introdus
-
-    encryptFile(inputFileName, encryptedFileName, key);// criptam fisierul
-    printf("Fișierul a fost criptat cu succes.\n");
-
-    decryptFile(encryptedFileName, decryptedFileName, key);// decriptam fisierul
-    printf("Fișierul a fost decriptat cu succes.\n");
+    char s[256];
+    while (strcmp(s, "exit") != 0) {
+        printf("Introduceti comanda(encrypt/decrypt/exit): ");
+        fgets(s, sizeof(s), stdin);
+        s[strcspn(s, "\n")] = '\0'; // Elimină caracterul newline de la sfârșitul șirului introdus
+        if (strcmp(s, "encrypt") == 0) {
+            printf("Introduceți cheia de criptare/decriptare: ");
+            fgets(key, sizeof(key), stdin);
+            key[strcspn(key, "\n")] = '\0'; // Elimină caracterul newline de la sfârșitul șirului introdus
+            encryptFile(inputFileName, encryptedFileName, key);// criptam fisierul
+            printf("Fișierul a fost criptat cu succes.\n");
+        }
+        else if (strcmp(s, "decrypt") == 0) {
+            printf("Introduceți cheia de criptare/decriptare: ");
+            fgets(key, sizeof(key), stdin);
+            key[strcspn(key, "\n")] = '\0'; // Elimină caracterul newline de la sfârșitul șirului introdus
+            decryptFile(encryptedFileName, decryptedFileName, key);// decriptam fisierul
+            printf("Fișierul a fost decriptat cu succes.\n");
+        }
+        else if (strcmp(s, "exit") == 0) {
+            break;
+        }
+        else {
+            printf("Comanda invalida!\n");
+        }
+    }
 
     return 0;
 }
