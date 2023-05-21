@@ -17,6 +17,20 @@ void encryptFile(const char* inputFileName, const char* outputFileName, const ch
     unsigned char* buffer = (unsigned char*)malloc(fileSize);// alocam memorie pentru buffer
     fread(buffer, 1, fileSize, inputFile); // citim din fisier in buffer
 
+    int keyLength = strlen(key);// lungimea cheii
+    int keyIndex = 0;// indexul cheii folosit pentru criptare
+
+    for (long i = 0; i < fileSize; i++) {// parcurgem bufferul si criptam
+        buffer[i] ^= key[keyIndex];// criptam cu xor
+        keyIndex = (keyIndex + 1) % keyLength;// incrementam indexul cheii keyIndex este actualizată pentru a parcurge ciclic cheia. Folosesc modulo pentru a fi sigur ca raman in intervalul [0, keyLength)
+    }
+
+    fwrite(buffer, 1, fileSize, outputFile);// scriem continutul bufferului in fisierul de iesire
+
+    fclose(inputFile);// inchidem fisierele
+    fclose(outputFile);
+
+    free(buffer);// eliberam memoria alocata
 }
 
 void decryptFile(const char* inputFileName, const char* outputFileName, const char* key) {
