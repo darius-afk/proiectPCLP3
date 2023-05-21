@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void encryptFile(const char* inputFileName, const char* outputFileName, const char* key) {// functia pentru criptare a fisierului primeste numele fisierului de intrare, de iesire si cheia
     FILE *inputFile = fopen(inputFileName, "rt");// fisierele sunt de tip text
@@ -38,7 +39,16 @@ void decryptFile(const char* inputFileName, const char* outputFileName, const ch
 }
 
 int main() {
-    
+    const char* inputFileName = "input.txt";// fisierul ce urmeaza sa fie criptat
+    const char* encryptedFileName = "encrypted.txt";// fisierul criptat
+    const char* decryptedFileName = "decrypted.txt";// fisierul decriptat
+    const char* key = "Nu_Restanta";// cheia dupa care se cripteaza
+
+    encryptFile(inputFileName, encryptedFileName, key);// criptam fisierul
+    printf("Fișierul a fost criptat cu succes.\n");
+
+    decryptFile(encryptedFileName, decryptedFileName, key);// decriptam fisierul
+    printf("Fișierul a fost decriptat cu succes.\n");
 
     return 0;
 }
